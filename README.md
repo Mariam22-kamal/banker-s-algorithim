@@ -1,6 +1,3 @@
-# banker-s-algorithim
-Sure, here's an example README file for the code:
-
 # Banker's Algorithm GUI
 
 This is a Python GUI application that implements the Banker's algorithm for deadlock prevention. The program allows the user to enter the following inputs:
