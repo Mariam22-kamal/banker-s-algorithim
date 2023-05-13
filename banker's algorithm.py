@@ -8,6 +8,9 @@ num_processes = 0
 global num_resources
 num_resources = 0
 
+global total_entries
+total_entries = [] 
+
 def bankers_algorithm(total_resources, available_resources, current_allocation, maximum_need, request_process,
                       request_resources):
     num_resources = len(total_resources)
@@ -87,39 +90,43 @@ def submit_request():
     if is_safe:
         print("Safe sequence:", safe_sequence)
 
-
-# Add resource entry fields
 def add_resource():
     global num_resources
 
     resource_label = tk.Label(resources_frame, text="Resource {}".format(num_resources + 1))
     resource_label.grid(row=0, column=num_resources + 2, padx=5, pady=5)
 
+    total_label = tk.Label(resources_frame, text="Total")
+    total_label.grid(row=1, column=0, padx=5, pady=5)
+
     total_entry = tk.Entry(resources_frame, width=10)
     total_entry.grid(row=1, column=num_resources + 2, padx=5, pady=5)
+    total_entries.append(total_entry) 
+
+    available_label = tk.Label(resources_frame, text="Available")
+    available_label.grid(row=2, column=0, padx=5, pady=5)
 
     available_entry = tk.Entry(resources_frame, width=10)
     available_entry.grid(row=2, column=num_resources + 2, padx=5, pady=5)
-
-    total_entries.append(total_entry)
     available_entries.append(available_entry)
 
     for i in range(num_processes):
-        allocation_entry = tk.Entry(processes_frame, width=10) 
-        allocation_entry.grid(row=i + 1, column=num_resources + 1, padx=5, pady=5)  
+        allocation_entry = tk.Entry(processes_frame, width=10)
+        allocation_entry.grid(row=i + 1, column=num_resources + 2, padx=5, pady=5)
         allocation_entries[i].append(allocation_entry)
 
         max_entry = tk.Entry(max_frame, width=10)
-        max_entry.grid(row=i + 1, column=num_resources + 1, padx=5, pady=5)
+        max_entry.grid(row=i + 1, column=num_resources + 2, padx=5, pady=5)
         max_entries[i].append(max_entry)
 
     num_resources += 1
 
 
+
+
 # Add process entry fields
 def add_process():
     global num_processes
-    global max_frame
 
     process_label = tk.Label(processes_frame, text="Process {}".format(num_processes + 1))
     process_label.grid(row=num_processes + 1, column=0, padx=5, pady=5)
@@ -137,7 +144,6 @@ def add_process():
         max_entries[num_processes].append(max_entry)
 
     num_processes += 1
-
 # Create the main window
 root = tk.Tk()
 root.title("Banker's Algorithm")
@@ -173,6 +179,12 @@ def add_request():
     request_entries.append(request_entry)
 
     num_resources += 1
+def run_algorithm():
+    # Get the total resources
+    total_resources = [int(total_entries[i].get()) for i in range(num_resources + 1)]  # Update range
+
+    # Rest of the code...
+
 
 # Create the main window
 window = tk.Tk()
@@ -275,5 +287,4 @@ submit_button.pack(pady=10)
 
 # Run the main loop
 window.mainloop()
-
 
