@@ -1,6 +1,12 @@
 import tkinter as tk
 from tkinter import messagebox
 
+# Declare global variables
+global num_processes
+num_processes = 0
+
+global num_resources
+num_resources = 0
 
 def bankers_algorithm(total_resources, available_resources, current_allocation, maximum_need, request_process,
                       request_resources):
@@ -82,54 +88,75 @@ def submit_request():
         print("Safe sequence:", safe_sequence)
 
 
-# Create a function to add a new resource entry field
+# Add resource entry fields
 def add_resource():
     global num_resources
 
     resource_label = tk.Label(resources_frame, text="Resource {}".format(num_resources + 1))
-    resource_label.grid(row=0, column=num_resources + 1, padx=5, pady=5)
+    resource_label.grid(row=0, column=num_resources + 2, padx=5, pady=5)
 
     total_entry = tk.Entry(resources_frame, width=10)
-    total_entry.grid(row=1, column=num_resources + 1, padx=5, pady=5)
+    total_entry.grid(row=1, column=num_resources + 2, padx=5, pady=5)
 
     available_entry = tk.Entry(resources_frame, width=10)
-    available_entry.grid(row=2, column=num_resources + 1, padx=5, pady=5)
+    available_entry.grid(row=2, column=num_resources + 2, padx=5, pady=5)
 
     total_entries.append(total_entry)
     available_entries.append(available_entry)
 
     for i in range(num_processes):
-        allocation_entry = tk.Entry(allocation_frame, width=10)
-        allocation_entry.grid(row=i + 1, column=num_resources + 1, padx=5, pady=5)
+        allocation_entry = tk.Entry(processes_frame, width=10)  # <-- Modify this line
+        allocation_entry.grid(row=i + 1, column=num_resources + 2, padx=5, pady=5)  # <-- Modify this line
         allocation_entries[i].append(allocation_entry)
 
         max_entry = tk.Entry(max_frame, width=10)
-        max_entry.grid(row=i + 1, column=num_resources + 1, padx=5, pady=5)
+        max_entry.grid(row=i + 1, column=num_resources + 2, padx=5, pady=5)
         max_entries[i].append(max_entry)
 
     num_resources += 1
 
 
-# Create a function to add a new process entry field
+# Add process entry fields
 def add_process():
     global num_processes
+    global max_frame  # Declare max_frame as a global variable
 
     process_label = tk.Label(processes_frame, text="Process {}".format(num_processes + 1))
-    process_label.grid(row=num_processes + 1, column=0, padx=5, pady=5)
+    process_label.grid(row=num_processes + 2, column=0, padx=5, pady=5)
 
     allocation_entries.append([])
     max_entries.append([])
 
     for i in range(num_resources):
-        allocation_entry = tk.Entry(allocation_frame, width=10)
-        allocation_entry.grid(row=num_processes + 1, column=i + 1, padx=5, pady=5)
+        allocation_entry = tk.Entry(processes_frame, width=10)
+        allocation_entry.grid(row=num_processes + 2, column=i + 1, padx=5, pady=5)
         allocation_entries[num_processes].append(allocation_entry)
 
         max_entry = tk.Entry(max_frame, width=10)
-        max_entry.grid(row=num_processes + 1, column=i + 1, padx=5, pady=5)
+        max_entry.grid(row=num_processes + 2, column=i + 1, padx=5, pady=5)
         max_entries[num_processes].append(max_entry)
 
     num_processes += 1
+
+# Create the main window
+root = tk.Tk()
+root.title("Banker's Algorithm")
+
+# Create frames
+resources_frame = tk.Frame(root)
+resources_frame.pack(padx=10, pady=10)
+
+processes_frame = tk.Frame(root)
+processes_frame.pack(padx=10, pady=10)
+
+buttons_frame = tk.Frame(root)
+buttons_frame.pack(padx=10, pady=10)
+
+allocation_frame = tk.Frame(root)
+allocation_frame.pack(padx=10, pady=10)
+
+max_frame = tk.Frame(root)
+max_frame.pack(padx=10, pady=10)
 
 
 # Create a function to add a new request entry field
@@ -137,16 +164,15 @@ def add_request():
     global num_resources
 
     request_label = tk.Label(request_frame, text="Resource {}".format(num_resources + 1))
-    request_label.grid(row=num_resources + 1, column=0, padx=5, pady=5)
+    request_label.grid(row=num_resources + 3, column=0, padx=5, pady=5)
 
     request_entry = tk.Entry(request_frame, width=10)
-    request_entry.grid(row=num_resources + 1, column=1, padx=5, pady=5)
+    request_entry.grid(row=num_resources + 3, column=1, padx=5, pady=5)
 
     request_labels.append(request_label)
     request_entries.append(request_entry)
 
     num_resources += 1
-
 
 # Create the main window
 window = tk.Tk()
