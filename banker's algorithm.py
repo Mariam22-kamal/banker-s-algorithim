@@ -105,8 +105,8 @@ def add_resource():
     available_entries.append(available_entry)
 
     for i in range(num_processes):
-        allocation_entry = tk.Entry(processes_frame, width=10)  # <-- Modify this line
-        allocation_entry.grid(row=i + 1, column=num_resources + 1, padx=5, pady=5)  # <-- Modify this line
+        allocation_entry = tk.Entry(processes_frame, width=10) 
+        allocation_entry.grid(row=i + 1, column=num_resources + 1, padx=5, pady=5)  
         allocation_entries[i].append(allocation_entry)
 
         max_entry = tk.Entry(max_frame, width=10)
