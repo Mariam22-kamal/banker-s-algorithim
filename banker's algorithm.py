@@ -106,11 +106,11 @@ def add_resource():
 
     for i in range(num_processes):
         allocation_entry = tk.Entry(processes_frame, width=10)  # <-- Modify this line
-        allocation_entry.grid(row=i + 1, column=num_resources + 2, padx=5, pady=5)  # <-- Modify this line
+        allocation_entry.grid(row=i + 1, column=num_resources + 1, padx=5, pady=5)  # <-- Modify this line
         allocation_entries[i].append(allocation_entry)
 
         max_entry = tk.Entry(max_frame, width=10)
-        max_entry.grid(row=i + 1, column=num_resources + 2, padx=5, pady=5)
+        max_entry.grid(row=i + 1, column=num_resources + 1, padx=5, pady=5)
         max_entries[i].append(max_entry)
 
     num_resources += 1
@@ -119,21 +119,21 @@ def add_resource():
 # Add process entry fields
 def add_process():
     global num_processes
-    global max_frame  # Declare max_frame as a global variable
+    global max_frame
 
     process_label = tk.Label(processes_frame, text="Process {}".format(num_processes + 1))
-    process_label.grid(row=num_processes + 2, column=0, padx=5, pady=5)
+    process_label.grid(row=num_processes + 1, column=0, padx=5, pady=5)
 
     allocation_entries.append([])
     max_entries.append([])
 
     for i in range(num_resources):
         allocation_entry = tk.Entry(processes_frame, width=10)
-        allocation_entry.grid(row=num_processes + 2, column=i + 1, padx=5, pady=5)
+        allocation_entry.grid(row=num_processes + 1, column=i + 1, padx=5, pady=5)
         allocation_entries[num_processes].append(allocation_entry)
 
         max_entry = tk.Entry(max_frame, width=10)
-        max_entry.grid(row=num_processes + 2, column=i + 1, padx=5, pady=5)
+        max_entry.grid(row=num_processes + 1, column=i + 1, padx=5, pady=5)
         max_entries[num_processes].append(max_entry)
 
     num_processes += 1
@@ -164,10 +164,10 @@ def add_request():
     global num_resources
 
     request_label = tk.Label(request_frame, text="Resource {}".format(num_resources + 1))
-    request_label.grid(row=num_resources + 3, column=0, padx=5, pady=5)
+    request_label.grid(row=num_resources + 1, column=0, padx=5, pady=5)
 
     request_entry = tk.Entry(request_frame, width=10)
-    request_entry.grid(row=num_resources + 3, column=1, padx=5, pady=5)
+    request_entry.grid(row=num_resources + 1, column=1, padx=5, pady=5)
 
     request_labels.append(request_label)
     request_entries.append(request_entry)
@@ -256,13 +256,13 @@ add_request_button = tk.Button(request_frame, text="Add Resource", command=add_r
 add_request_button.grid(row=2, column=0, padx=5, pady=5)
 
 def add_request():
-    global num_resources
+    num_resources
 
     request_label = tk.Label(request_frame, text="Resource {}".format(num_resources + 1))
-    request_label.grid(row=num_resources + 3, column=0, padx=5, pady=5)
+    request_label.grid(row=num_resources + 1, column=0, padx=5, pady=5)
 
     request_entry = tk.Entry(request_frame, width=10)
-    request_entry.grid(row=num_resources + 3, column=1, padx=5, pady=5)
+    request_entry.grid(row=num_resources + 1, column=1, padx=5, pady=5)
 
     request_labels.append(request_label)
     request_entries.append(request_entry)
